@@ -38,7 +38,8 @@ export class ConclusionController {
       ? {
           id: data.id,
           url: data.url,
-          isScam: this.converScanIntoSignal(data.scamProbability),
+          status: this.converScanIntoSignal(data.scamProbability),
+          scamProbability: data.scamProbability,
           scale: data.scale,
           conclusion: data.conclusion,
           keypoints: data.keypoints,

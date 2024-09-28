@@ -8,9 +8,7 @@ import {
 import { Conclusion } from './conclusion.interface';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ConclusionResponseDto
-  implements Omit<Conclusion, 'scamProbability'>
-{
+export class ConclusionResponseDto implements Conclusion {
   @IsDefined()
   @IsNotEmpty()
   id: string;
@@ -27,7 +25,16 @@ export class ConclusionResponseDto
   @IsDefined()
   @IsNotEmpty()
   @IsString()
-  isScam: string;
+  status: string;
+
+  @IsDefined()
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({
+    type: Number,
+    example: 7,
+  })
+  scamProbability: number;
 
   @IsDefined()
   @IsNotEmpty()
