@@ -30,7 +30,7 @@ export class SiteReportService {
     return this.siteReportRepository.create(data);
   }
 
-  async get(id: string): Promise<SiteReportResponseDto> {
-    return this.siteReportRepository.get(id);
+  async get(url: string): Promise<SiteReportResponseDto[]> {
+    return this.siteReportRepository.get(url);
   }
 }

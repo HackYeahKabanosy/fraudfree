@@ -27,8 +27,8 @@ export class SiteReportController {
   }
 
   @Get()
-  async get(@Query() data: GetSiteReportDto): Promise<SiteReportResponseDto> {
-    return this.buildResponse(await this.siteReportService.get(data.url));
+  async get(@Query() data: GetSiteReportDto): Promise<SiteReportResponseDto[]> {
+    return await this.siteReportService.get(data.url);
   }
 
   buildResponse(data: SiteReport): SiteReportResponseDto {

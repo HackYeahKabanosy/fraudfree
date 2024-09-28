@@ -1,6 +1,9 @@
 export interface Conclusion {
   id?: string;
   url: string;
-  data: object;
+  scamProbability: number;
+  scale: string;
+  conclusion: string;
+  keypoints: object;
   createdAt: Date;
 }

@@ -2,7 +2,6 @@ import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ConclusionService } from './conclusion.service';
 import {
-  CreateConclusionDto,
   ConclusionResponseDto,
   GetConclusionDto,
   GenerateConclusionDto,
@@ -19,16 +18,19 @@ export class ConclusionController {
     return await this.conclusionService.generate(data.url);
   }
 
-  @Post()
-  async create(
-    @Body() data: CreateConclusionDto,
-  ): Promise<ConclusionResponseDto> {
-    return this.buildResponse(await this.conclusionService.create(data));
-  }
-
   @Get()
   async get(@Query() data: GetConclusionDto): Promise<ConclusionResponseDto> {
     return this.buildResponse(await this.conclusionService.get(data.url));
+  }
+
+  private converScanIntoSignal(scamProbability: number) {
+    return scamProbability < 2
+      ? 'Safe'
+      : scamProbability < 4
+        ? 'Ok'
+        : scamProbability < 6
+          ? 'Warning'
+          : 'Danger';
   }
 
   buildResponse(data: Conclusion): ConclusionResponseDto {
@@ -36,7 +38,10 @@ export class ConclusionController {
       ? {
           id: data.id,
           url: data.url,
-          data: data.data,
+          isScam: this.converScanIntoSignal(data.scamProbability),
+          scale: data.scale,
+          conclusion: data.conclusion,
+          keypoints: data.keypoints,
           createdAt: data.createdAt,
         }
       : null;

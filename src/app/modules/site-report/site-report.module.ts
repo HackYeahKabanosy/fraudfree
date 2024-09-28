@@ -15,5 +15,6 @@ import { ProviderModule } from '../provider/provider.module';
   ],
   controllers: [SiteReportController],
   providers: [SiteReportService, SiteReportRepository],
+  exports: [SiteReportService],
 })
 export class SiteReportModule {}

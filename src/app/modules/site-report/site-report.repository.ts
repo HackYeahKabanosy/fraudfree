@@ -20,9 +20,7 @@ export class SiteReportRepository {
     );
   }
 
-  async get(id: string): Promise<SiteReportResponseDto> {
-    return documentToObject<SiteReportResponseDto>(
-      await this.siteReportModel.findById(id),
-    );
+  async get(url: string): Promise<SiteReportResponseDto[]> {
+    return await this.siteReportModel.find({ url });
   }
 }

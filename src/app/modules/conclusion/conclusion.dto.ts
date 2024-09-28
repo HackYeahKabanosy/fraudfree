@@ -1,8 +1,16 @@
-import { IsDefined, IsNotEmpty, IsObject, IsString } from 'class-validator';
+import {
+  IsDefined,
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsString,
+} from 'class-validator';
 import { Conclusion } from './conclusion.interface';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ConclusionResponseDto implements Conclusion {
+export class ConclusionResponseDto
+  implements Omit<Conclusion, 'scamProbability'>
+{
   @IsDefined()
   @IsNotEmpty()
   id: string;
@@ -18,15 +26,47 @@ export class ConclusionResponseDto implements Conclusion {
 
   @IsDefined()
   @IsNotEmpty()
+  @IsString()
+  isScam: string;
+
+  @IsDefined()
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({
+    type: String,
+    example: '0-10',
+  })
+  scale: string;
+
+  @IsDefined()
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({
+    type: String,
+    example:
+      'The domain was created on 11/01/1994, indicating it has been around for a long time.',
+  })
+  conclusion: string;
+
+  @IsDefined()
+  @IsNotEmpty()
   @IsObject()
   @ApiProperty({
     type: Object,
-    example: {
-      score: 1.0,
-      trust: 'high',
-    },
+    example: [
+      {
+        title: 'Domain Age and Registration',
+        detail:
+          'The domain was created on 11/01/1994, indicating it has been around for a long time.',
+      },
+      {
+        title: 'Registrar Information',
+        detail:
+          'The domain is registered with MarkMonitor Inc., which is a reputable registrar.',
+      },
+    ],
   })
-  data: object;
+  keypoints: object;
 
   @IsDefined()
   @IsNotEmpty()
@@ -39,7 +79,11 @@ export class ConclusionResponseDto implements Conclusion {
 }
 
 export class GenerateConclusionDto
-  implements Omit<Conclusion, 'createdAt' | 'data'>
+  implements
+    Omit<
+      Conclusion,
+      'createdAt' | 'scamProbability' | 'scale' | 'conclusion' | 'keypoints'
+    >
 {
   @IsDefined()
   @IsNotEmpty()
@@ -63,17 +107,52 @@ export class CreateConclusionDto implements Omit<Conclusion, 'createdAt'> {
 
   @IsDefined()
   @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({
+    type: Number,
+    example: 7,
+  })
+  scamProbability: number;
+
+  @IsDefined()
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({
+    type: String,
+    example: '0-10',
+  })
+  scale: string;
+
+  @IsDefined()
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({
+    type: String,
+    example:
+      'The domain was created on 11/01/1994, indicating it has been around for a long time.',
+  })
+  conclusion: string;
+
+  @IsDefined()
+  @IsNotEmpty()
   @IsObject()
   @ApiProperty({
     type: Object,
-    example: {
-      score: 1.0,
-      trust: 'high',
-    },
+    example: [
+      {
+        title: 'Domain Age and Registration',
+        detail:
+          'The domain was created on 11/01/1994, indicating it has been around for a long time.',
+      },
+      {
+        title: 'Registrar Information',
+        detail:
+          'The domain is registered with MarkMonitor Inc., which is a reputable registrar.',
+      },
+    ],
   })
-  data: object;
+  keypoints: object;
 }
-
 export class GetConclusionDto {
   @IsDefined()
   @IsNotEmpty()

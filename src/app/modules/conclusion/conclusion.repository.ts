@@ -20,9 +20,7 @@ export class ConclusionRepository {
     );
   }
 
-  async get(id: string): Promise<ConclusionResponseDto> {
-    return documentToObject<ConclusionResponseDto>(
-      await this.conclusionModel.findById(id),
-    );
+  async get(url: string): Promise<Conclusion> {
+    return await this.conclusionModel.findOne({ url });
   }
 }
