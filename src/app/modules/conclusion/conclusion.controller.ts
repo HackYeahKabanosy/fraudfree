@@ -1,22 +1,13 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ConclusionService } from './conclusion.service';
-import {
-  ConclusionResponseDto,
-  GetConclusionDto,
-  GenerateConclusionDto,
-} from './conclusion.dto';
+import { ConclusionResponseDto, GetConclusionDto } from './conclusion.dto';
 import { Conclusion } from './conclusion.interface';
 
 @ApiTags('Conclusion')
 @Controller('Conclusion')
 export class ConclusionController {
   constructor(private readonly conclusionService: ConclusionService) {}
-
-  @Post('generate')
-  async generate(@Body() data: GenerateConclusionDto) {
-    return await this.conclusionService.generate(data.url);
-  }
 
   @Get()
   async get(@Query() data: GetConclusionDto): Promise<ConclusionResponseDto> {

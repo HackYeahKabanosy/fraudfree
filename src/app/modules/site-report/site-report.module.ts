@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { SiteReportController } from './site-report.controller';
 import { SiteReportService } from './site-report.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SiteReportSchema } from './site-report.schema';
@@ -13,7 +12,6 @@ import { ProviderModule } from '../provider/provider.module';
     ]),
     ProviderModule,
   ],
-  controllers: [SiteReportController],
   providers: [SiteReportService, SiteReportRepository],
   exports: [SiteReportService],
 })

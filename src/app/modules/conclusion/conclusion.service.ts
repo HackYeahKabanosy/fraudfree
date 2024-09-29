@@ -13,7 +13,7 @@ export class ConclusionService {
     private readonly siteReportService: SiteReportService,
   ) {}
 
-  async generate(url: string) {
+  async generate(url: string): Promise<Conclusion> {
     const reports: SiteReportResponseDto[] =
       await this.siteReportService.getNotEq(url, 'trustPilot');
 
@@ -21,21 +21,19 @@ export class ConclusionService {
       url,
       'trustPilot',
     );
-
     if (reports.length === 0) {
-      return `No reports found for ${url}`;
+      throw new Error(`No reports found for ${url}`);
     }
-
     try {
       const sumarizedObj = await this.summarize(reports);
       const sumarized = {
         ...JSON.parse(sumarizedObj),
         customerReviews: customerReviews.data,
       };
-      await this.create(sumarized);
-      return `${url} new conclusion generated`;
+      const result = await this.create(sumarized);
+      return result;
     } catch (error) {
-      return `Error generating conclusion for ${url}`;
+      throw new Error(error);
     }
   }
 
@@ -52,6 +50,23 @@ export class ConclusionService {
   }
 
   async get(url: string): Promise<Conclusion> {
-    return this.conclusionRepository.get(url);
+    let conclusion = await this.conclusionRepository.get(url);
+    if (!conclusion) {
+      const siteReportReviews = await this.siteReportService.getEqual(
+        url,
+        'trustPilot',
+      );
+      const siteReportAnalysis = await this.siteReportService.getNotEq(
+        url,
+        'trustPilot',
+      );
+      if (siteReportReviews && siteReportAnalysis) {
+        conclusion = await this.generate(url);
+      } else {
+        await this.siteReportService.crawler(url);
+        conclusion = await this.generate(url);
+      }
+    }
+    return conclusion;
   }
 }
