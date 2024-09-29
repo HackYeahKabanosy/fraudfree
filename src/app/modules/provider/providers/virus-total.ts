@@ -1,12 +1,12 @@
 import axios from 'axios';
+import { config } from 'src/config/config';
 
 export class VirusTotal {
   private apiKey: string;
 
   constructor() {
     // Store your VirusTotal API key
-    this.apiKey =
-      'b4a6e161f5b9c62a6ad9a217ccfd72c5aad1e3b1e4e4ce98ba2782532f1dbc52';
+    this.apiKey = config.vtSecret;
   }
 
   async factory(url: string) {

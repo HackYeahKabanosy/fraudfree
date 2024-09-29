@@ -6,4 +6,5 @@ export const config = {
   env: process.env.NODE_ENV,
   mongoUrl: process.env.MONGO_URL,
   gptSecret: process.env.GPT_SECRET_KEY,
+  vtSecret: process.env.VT_SECRET_KEY
 };

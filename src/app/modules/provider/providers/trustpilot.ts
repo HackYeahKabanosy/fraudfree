@@ -39,13 +39,14 @@ export class TrustPilot {
     const reviewSummary = $('[class^="styles_clickable"] span').text().trim();
     const [totalReviews, ratingDescription] = reviewSummary.split('•').map(part => part.trim());
 
+    const finalRatingDescription = ratingDescription || "no customer reviews for this site";
+
     return {
       companyName,
       totalReviews,
       trustScore,
-      ratingDescription,
+      ratingDescription: finalRatingDescription,
       rating,
     };
   }
 }
-
