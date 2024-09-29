@@ -1,15 +1,12 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-export class Trustpilot {
+export class TrustPilot {
   private url: string;
 
-  constructor(url: string) {
-    this.url = url;
-  }
-
-  async factory() {
+  async factory(url: string) {
     try {
+      this.url = this.enrichUrl(url);
       const response = await this.fetchPageData(this.url);
       const parsedData = this.parseData(response.data);
       return parsedData;
@@ -24,6 +21,14 @@ export class Trustpilot {
   private async fetchPageData(url: string) {
     const response = await axios.get(url);
     return response;
+  }
+
+  private enrichUrl(url: string): string {
+    if (!url.startsWith('https://www.trustpilot.com/review/') && !url.startsWith('https://www.trustpilot.com/')) {
+      console.log(`https://www.trustpilot.com/review/${url}`);
+      return `https://www.trustpilot.com/review/${url}`;
+    }
+    return url;
   }
 
   private parseData(html: string) {
@@ -43,3 +48,4 @@ export class Trustpilot {
     };
   }
 }
+
