@@ -1,5 +1,10 @@
 # Free Fraud API
 
+## Runing using our APIs
+![plugin-example](https://github.com/user-attachments/assets/e76c45aa-f36a-4fe9-96d1-3f8f362ca378)
+
+
+
 ## Starting Development
 
 - First clone the repo
