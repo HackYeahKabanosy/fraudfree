@@ -1,4 +1,4 @@
-# Free Fraud API
+# 🛡️ FraudFree API
 
 If you're looking the frontend, go [here](https://github.com/HackYeahKabanosy/fraud-free-webapp)
 
@@ -34,6 +34,15 @@ Watch the [Youtube video](https://youtu.be/g39z8EUkI6Y)
 3. Find our zip [folder](https://github.com/HackYeahKabanosy/fraudfree/tree/main/browser_plugin/mozilla)
 
 
+## 🛠️ Tech Stack
+
+- **Next.js** - A powerful React framework for building dynamic web applications.
+- **TailwindCSS** - A utility-first CSS framework for fast UI development.
+- **Framer Motion** - For smooth animations.
+- **NestJS** - Powerfull API, check the [api on github](https://github.com/HackYeahKabanosy/fraudfree).
+- **Vanilla JS** - The tasty way to create our plugin for chrome and firefox, [check on github](https://github.com/HackYeahKabanosy/fraudfree/tree/main/browser_plugin/mozilla).
+- **MongoDB** - A NoSQL database for storing website information.
+
 ## Starting Development
 
 - First clone the repo
@@ -64,3 +73,5 @@ npm run start:dev
 
 - Then just visit in the browser the swagger
   https://localhost:3000/swagger
+
+  
