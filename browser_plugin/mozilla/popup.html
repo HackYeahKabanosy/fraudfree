@@ -1,32 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       body {
         font-family: Arial, sans-serif;
-        width: 300px;
-        padding: 10px;
+        width: 320px; /* Increased width for more content space */
+        padding: 20px;
+        background-color: #f8f9fa; /* Light background color */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        margin: auto; /* Centering the container */
+        margin-top: 30px; /* Top margin for spacing */
       }
+
+      h3 {
+        font-size: 18px;
+        text-align: center; /* Center the heading */
+        margin-bottom: 20px; /* Spacing below the heading */
+        color: #333;
+      }
+
+      #analyzeBtn {
+        display: block; /* Makes the button block-level */
+        width: 100%; /* Button fills the full width */
+        padding: 12px; /* Added padding for larger button size */
+        background-color: #007bff; /* Bootstrap-style primary blue */
+        color: white; /* White text color */
+        border: none; /* Removes default button borders */
+        border-radius: 5px; /* Rounded corners */
+        font-size: 16px; /* Increased font size */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s ease; /* Smooth color change */
+      }
+
+      #analyzeBtn:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+      }
+
       #status {
         font-size: 18px;
         font-weight: bold;
-        margin: 10px 0;
-        padding: 10px;
+        margin: 15px 0;
+        padding: 12px;
         text-align: center;
+        background-color: #e9ecef;
+        border-radius: 4px;
       }
-      #conclusion {
+
+      #conclusion, #details {
         font-size: 14px;
         color: #333;
         margin-top: 10px;
+        text-align: center;
+      }
+
+      #details {
+        color: rgb(41, 41, 226);
       }
     </style>
   </head>
   <body>
-    <h3>Domain Safety Analyzer</h3>
+    <h3>FraudFree - Domain Safety Analyzer</h3>
     <button id="analyzeBtn">Analyze</button>
     <div id="results">
       <div id="status"></div>
       <div id="conclusion"></div>
+      <div id="details"></div>
     </div>
     <script src="popup.js"></script>
   </body>

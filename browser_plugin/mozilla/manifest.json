@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Domain Safety Analyzer",
+    "name": "FraudFree - Domain Safety Analyzer",
     "version": "1.0",
     "description": "Analyzes domain safety and scam probability.",
     "permissions": [
