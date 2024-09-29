@@ -41,7 +41,7 @@ export class ConclusionService {
 
   async summarize(report: SiteReportResponseDto[]): Promise<string> {
     const data = report.toString().trim();
-    const prompt = `Based on the follow report give me a probability from 0 to 10 of this ecommerce be a scam, return me a json with the follow fields: url, scamProbability, scale should be a string "0-10", conclusion, keypoints(Domain Age and Registration, Registrar Information, WHOIS Information, Reputation Score, Domain Status, Recent Updates), please give me the json as string withut any codeblock: ${data}`;
+    const prompt = `Based on the follow report give me a probability from 0 to 10 of this ecommerce be a scam, return me a json with the follow fields: url, scamProbability, scale should be a string "0-10", conclusion, keypoints(Domain Age and Registration, Registrar Information, WHOIS Information, Reputation Score, Domain Status, Recent Updates), please give me the json as string without any codeblock: ${data}`;
     const llm = new ChatGpt();
     const response = await llm.factory(JSON.stringify(prompt));
     return response;
