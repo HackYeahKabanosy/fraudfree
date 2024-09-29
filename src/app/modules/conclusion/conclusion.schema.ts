@@ -7,5 +7,6 @@ export const ConclusionSchema = new mongoose.Schema<Conclusion>({
   scale: { type: String, required: true },
   conclusion: { type: String, required: true },
   keypoints: { type: Object, required: false },
+  customerReviews: { type: Object, required: false },
   createdAt: { type: Date, default: Date.now },
 });

@@ -30,7 +30,17 @@ export class SiteReportService {
     return this.siteReportRepository.create(data);
   }
 
-  async get(url: string): Promise<SiteReportResponseDto[]> {
-    return this.siteReportRepository.get(url);
+  async getNotEq(
+    url: string,
+    provider: string,
+  ): Promise<SiteReportResponseDto[]> {
+    return this.siteReportRepository.getNotEq(url, provider);
+  }
+
+  async getEqual(
+    url: string,
+    provider: string,
+  ): Promise<SiteReportResponseDto> {
+    return this.siteReportRepository.getEqual(url, provider);
   }
 }

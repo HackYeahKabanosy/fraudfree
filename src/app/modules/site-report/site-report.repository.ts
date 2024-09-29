@@ -20,7 +20,25 @@ export class SiteReportRepository {
     );
   }
 
-  async get(url: string): Promise<SiteReportResponseDto[]> {
-    return await this.siteReportModel.find({ url });
+  async getNotEq(
+    url: string,
+    provider: string,
+  ): Promise<SiteReportResponseDto[]> {
+    return await this.siteReportModel.find({
+      $and: [{ url }, { provider: { $ne: provider } }],
+    });
+  }
+
+  async getEqual(
+    url: string,
+    provider: string,
+  ): Promise<SiteReportResponseDto> {
+    return await this.siteReportModel.findOne(
+      {
+        $and: [{ url }, { provider }],
+      },
+      {},
+      { sort: { createdAt: -1 } },
+    );
   }
 }

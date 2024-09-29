@@ -77,6 +77,21 @@ export class ConclusionResponseDto implements Conclusion {
 
   @IsDefined()
   @IsNotEmpty()
+  @IsObject()
+  @ApiProperty({
+    type: Object,
+    example: {
+      companyName: 'Amazon',
+      totalReviews: '33,417',
+      trustScore: '1.5',
+      ratingDescription: 'Bad',
+      rating: '1.7',
+    },
+  })
+  customerReviews: object;
+
+  @IsDefined()
+  @IsNotEmpty()
   @IsString()
   @ApiProperty({
     type: String,
@@ -159,6 +174,21 @@ export class CreateConclusionDto implements Omit<Conclusion, 'createdAt'> {
     ],
   })
   keypoints: object;
+
+  @IsDefined()
+  @IsNotEmpty()
+  @IsObject()
+  @ApiProperty({
+    type: Object,
+    example: {
+      companyName: 'Amazon',
+      totalReviews: '33,417',
+      trustScore: '1.5',
+      ratingDescription: 'Bad',
+      rating: '1.7',
+    },
+  })
+  customerReviews: object;
 }
 export class GetConclusionDto {
   @IsDefined()

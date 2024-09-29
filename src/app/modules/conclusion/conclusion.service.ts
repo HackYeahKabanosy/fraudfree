@@ -15,14 +15,24 @@ export class ConclusionService {
 
   async generate(url: string) {
     const reports: SiteReportResponseDto[] =
-      await this.siteReportService.get(url);
+      await this.siteReportService.getNotEq(url, 'trustPilot');
+
+    const customerReviews = await this.siteReportService.getEqual(
+      url,
+      'trustPilot',
+    );
+
     if (reports.length === 0) {
       return `No reports found for ${url}`;
     }
 
     try {
       const sumarizedObj = await this.summarize(reports);
-      await this.create(JSON.parse(sumarizedObj));
+      const sumarized = {
+        ...JSON.parse(sumarizedObj),
+        customerReviews: customerReviews.data,
+      };
+      await this.create(sumarized);
       return `${url} new conclusion generated`;
     } catch (error) {
       return `Error generating conclusion for ${url}`;

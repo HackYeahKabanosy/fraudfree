@@ -43,6 +43,7 @@ export class ConclusionController {
           scale: data.scale,
           conclusion: data.conclusion,
           keypoints: data.keypoints,
+          customerReviews: data.customerReviews,
           createdAt: data.createdAt,
         }
       : null;
