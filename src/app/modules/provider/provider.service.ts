@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { VirusTotal } from './providers';
+import { TrustPilot, VirusTotal } from './providers';
 import { ProviderResponseDto } from './provider.dto';
 
 @Injectable()
 export class ProviderService {
   private readonly providers = {
     virusTotal: new VirusTotal(),
+    trustPilot: new TrustPilot(),
   };
 
   async factory(url: string): Promise<ProviderResponseDto[]> {
