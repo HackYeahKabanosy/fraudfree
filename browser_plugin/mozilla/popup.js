@@ -35,17 +35,32 @@ function extractRootDomain(hostname) {
 function displayResults(data) {
   let statusDiv = document.getElementById('status');
   let conclusionDiv = document.getElementById('conclusion');
+  let detailsDiv = document.getElementById('details');
   
   if (data.status === "Safe") {
     statusDiv.style.backgroundColor = "green";
     statusDiv.style.color = "white";
     statusDiv.textContent = `Status: ${data.status}`;
     conclusionDiv.textContent = data.conclusion;
+    detailsDiv.innerHTML = `<a class="big-txt" href="https://fraud-free-webapp.vercel.app/detail/${data.url}" target="_blank">Details</a>`;
+  } else if (data.status === "Ok") {
+    statusDiv.style.backgroundColor = "blue";
+    statusDiv.style.color = "white";
+    statusDiv.textContent = `Status: ${data.status}`;
+    conclusionDiv.textContent = "This website is safe, but some issues were reported. Please proceed with caution.";
+    detailsDiv.innerHTML = `<a class="big-txt" href="https://fraud-free-webapp.vercel.app/detail/${data.url}" target="_blank">Details</a>`;
+  } else if (data.status === "Warning") {
+    statusDiv.style.backgroundColor = "blue";
+    statusDiv.style.color = "white";
+    statusDiv.textContent = `Status: ${data.status}`;
+    conclusionDiv.textContent = "This website is not safe, issues were reported. Please proceed with caution.";
+    detailsDiv.innerHTML = `<a class="big-txt" href="https://fraud-free-webapp.vercel.app/detail/${data.url}" target="_blank">Details</a>`;
   } else {
     statusDiv.style.backgroundColor = "red";
     statusDiv.style.color = "white";
     statusDiv.textContent = `Status: ${data.status}`;
-    conclusionDiv.textContent = "This website may not be safe. Please proceed with caution.";
+    conclusionDiv.textContent = "This website may not be safe. Avoid.";
+    detailsDiv.innerHTML = `<a class="big-txt" href="https://fraud-free-webapp.vercel.app/detail/${data.url}" target="_blank">details</a>`;
   }
 }
 
