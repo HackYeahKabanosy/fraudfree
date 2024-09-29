@@ -8,6 +8,21 @@ https://fraud-free-api.onrender.com/swagger#/
 
 ![swegger-ex](https://github.com/user-attachments/assets/5a6fb570-9997-412b-bc45-e38fad9ab711)
 
+## Installing extension on Chrome
+
+Watch the [Youtube video](https://youtu.be/dTMOsUeuzEg)
+1. Click on manage extension
+2. Load unpacked
+3. Find our [folder](https://github.com/HackYeahKabanosy/fraudfree/tree/main/browser_plugin/mozilla)
+
+## Installing extension on Firefox
+
+Watch the [Youtube video](https://youtu.be/g39z8EUkI6Y)
+
+1. Click on manage extension
+2. Load unpacked
+3. Find our zip [folder](https://github.com/HackYeahKabanosy/fraudfree/tree/main/browser_plugin/mozilla)
+
 
 ## Starting Development
 
