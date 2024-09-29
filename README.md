@@ -3,6 +3,10 @@
 ## Runing using our APIs
 ![plugin-example](https://github.com/user-attachments/assets/e76c45aa-f36a-4fe9-96d1-3f8f362ca378)
 
+## Swagger
+https://fraud-free-api.onrender.com/swagger#/
+
+![swegger-ex](https://github.com/user-attachments/assets/5a6fb570-9997-412b-bc45-e38fad9ab711)
 
 
 ## Starting Development
