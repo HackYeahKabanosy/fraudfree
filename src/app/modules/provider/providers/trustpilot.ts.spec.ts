@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TrustPilot } from './TrustPilot';  // Adjust path if necessary
+import { TrustPilot } from './trustpilot';
 
 jest.mock('axios');
 
