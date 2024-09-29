@@ -5,6 +5,14 @@ If you're looking the frontend, go [here](https://github.com/HackYeahKabanosy/fr
 ## Runing using our APIs
 ![plugin-example](https://github.com/user-attachments/assets/e76c45aa-f36a-4fe9-96d1-3f8f362ca378)
 
+## Getting raw data
+run our model that generates the conclusion about the shops/e-commerces, curl example:
+```
+curl -X 'GET' \
+  'https://fraud-free-api.onrender.com/Conclusion?url=amazon.com' \
+  -H 'accept: */*'
+```
+
 ## Swagger
 https://fraud-free-api.onrender.com/swagger#/
 
