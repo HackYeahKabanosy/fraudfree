@@ -1,4 +1,5 @@
 // src/app/modules/provider/providers/index.ts
+export * from './fraud-prediction';
 export * from './legal-keywords-checker';
 export * from './html-parse';
 export * from './html-text-module';

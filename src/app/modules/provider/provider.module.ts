@@ -11,6 +11,7 @@ import {
   MediaModule,
   UpdateDate,
   ThemeChecker,
+  FraudPrediction,
 } from './providers';
 
 @Module({
@@ -24,6 +25,7 @@ import {
     MediaModule,
     UpdateDate,
     ThemeChecker,
+    FraudPrediction,
   ],
   exports: [ProviderService],
 })

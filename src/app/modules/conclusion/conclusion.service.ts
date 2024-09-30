@@ -38,6 +38,8 @@ export class ConclusionService {
         mediaModule: pipelineResults['mediaModule']?.score || 0,
         updateDate: pipelineResults['updateDate']?.score || 0,
         trustPilotChecker: pipelineResults['trustPilotChecker']?.score || 0,
+        virusTotal: pipelineResults['virusTotal']?.score || 0,
+        fraudPrediction: pipelineResults['fraudPrediction']?.score || 0,
       };
 
       const scamProbability = WeightedSum.calculateWeightedSum(scores);
@@ -49,8 +51,6 @@ export class ConclusionService {
       );
 
       const oClonclusionGpt = JSON.parse(conclusionChatGpt);
-
-      console.log(oClonclusionGpt);
 
       const conclusionData: CreateConclusionDto = {
         url,

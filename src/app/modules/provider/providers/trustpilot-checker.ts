@@ -2,33 +2,30 @@
 
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import { URL } from 'url';
+
+export interface TrustPilotData {
+  companyName: string;
+  totalReviews: string;
+  trustScore: string;
+  ratingDescription: string;
+  rating: number;
+}
 
 export class TrustPilotChecker {
-  private reviewBaseUrl = 'https://www.trustpilot.com/review/';
+  private url: string;
 
   async factory(url: string) {
     try {
-      const domain = this.extractDomain(url);
-      const trustpilotUrl = `${this.reviewBaseUrl}${domain}`;
+      this.url = this.enrichUrl(url);
+      const response = await this.fetchPageData(this.url);
+      const parsedData = this.parseData(response.data);
 
-      const response = await axios.get(trustpilotUrl);
-      const html = response.data;
-      const $ = cheerio.load(html);
-
-      const ratingText = $('div[data-rating-typography]').text().trim();
-      const totalReviewsText = $('span.typography_body-l__KUYFJ').text().trim();
-
-      const rating = parseFloat(ratingText) || 0;
-      const totalReviews =
-        parseInt(totalReviewsText.replace(/[^0-9]/g, '')) || 0;
-
-      const score = rating / 5; // Normalize to 0-1 scale
+      const score = parsedData.rating / 5;
 
       return {
-        companyName: domain,
-        rating,
-        totalReviews,
+        companyName: url,
+        rating: parsedData.rating,
+        totalReviews: parsedData.totalReviews,
         score,
       };
     } catch (error) {
@@ -39,8 +36,41 @@ export class TrustPilotChecker {
     }
   }
 
-  private extractDomain(url: string): string {
-    const parsedUrl = new URL(url);
-    return parsedUrl.hostname.replace(/^www\./, '');
+  private async fetchPageData(url: string) {
+    const response = await axios.get(url);
+    return response;
+  }
+
+  private enrichUrl(url: string): string {
+    if (
+      !url.startsWith('https://www.trustpilot.com/review/') &&
+      !url.startsWith('https://www.trustpilot.com/')
+    ) {
+      return `https://www.trustpilot.com/review/${url}`;
+    }
+    return url;
+  }
+
+  private parseData(html: string): TrustPilotData {
+    const $ = cheerio.load(html);
+    const rating = $('[data-rating-typography]').text().trim();
+    const companyName = $('[class^="typography_display"]').text().trim();
+    const trustScore =
+      $('img[alt^="TrustScore"]').attr('alt')?.split(' ')[1] ?? '';
+    const reviewSummary = $('[class^="styles_clickable"] span').text().trim();
+    const [totalReviews, ratingDescription] = reviewSummary
+      .split('•')
+      .map((part) => part.trim());
+
+    const finalRatingDescription =
+      ratingDescription || 'no customer reviews for this site';
+
+    return {
+      companyName,
+      totalReviews,
+      trustScore,
+      ratingDescription: finalRatingDescription,
+      rating: parseFloat(rating),
+    };
   }
 }

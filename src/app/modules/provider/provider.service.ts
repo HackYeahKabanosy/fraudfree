@@ -1,5 +1,3 @@
-// src/app/modules/provider/provider.service.ts
-
 import { Injectable } from '@nestjs/common';
 import {
   TrustPilotChecker,
@@ -10,6 +8,7 @@ import {
   MediaModule,
   UpdateDate,
   ThemeChecker,
+  FraudPrediction,
 } from './providers';
 
 @Injectable()
@@ -25,6 +24,7 @@ export class ProviderService {
     private mediaModule: MediaModule,
     private updateDate: UpdateDate,
     private themeChecker: ThemeChecker,
+    private fraudPrediction: FraudPrediction,
   ) {
     this.providers = {
       legalKeywordsChecker: this.legalKeywordsChecker,
@@ -35,6 +35,7 @@ export class ProviderService {
       mediaModule: this.mediaModule,
       updateDate: this.updateDate,
       trustPilotChecker: this.trustPilotChecker,
+      fraudPrediction: this.fraudPrediction,
     };
   }
 

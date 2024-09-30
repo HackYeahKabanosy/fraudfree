@@ -17,6 +17,8 @@ export class PipelineService {
       { name: 'mediaModule', dependencies: ['htmlParse'] },
       { name: 'updateDate', dependencies: [] },
       { name: 'trustPilotChecker', dependencies: [] },
+      { name: 'virusTotal', dependencies: [] },
+      { name: 'fraudPrediction', dependencies: [] },
     ];
 
     const results = {};
