@@ -1,3 +1,5 @@
+// src/app/modules/site-report/site-report.dto.ts
+
 import { IsDefined, IsNotEmpty, IsObject, IsString } from 'class-validator';
 import { SiteReport } from './site-report.interface';
 import { ApiProperty } from '@nestjs/swagger';
@@ -27,6 +29,15 @@ export class SiteReportResponseDto implements SiteReport {
 
   @IsDefined()
   @IsNotEmpty()
+  @IsString()
+  @ApiProperty({
+    type: String,
+    example: 'layer1',
+  })
+  layer: string;
+
+  @IsDefined()
+  @IsNotEmpty()
   @IsObject()
   @ApiProperty({
     type: Object,
@@ -39,28 +50,16 @@ export class SiteReportResponseDto implements SiteReport {
 
   @IsDefined()
   @IsNotEmpty()
-  @IsString()
   @ApiProperty({
-    type: String,
+    type: Date,
     example: '2021-08-25T17:00:00.000Z',
   })
   createdAt: Date;
 }
 
-export class CrawlerSiteReportDto
-  implements Omit<SiteReport, 'createdAt' | 'data' | 'provider'>
+export class CreateSiteReportDto
+  implements Omit<SiteReport, 'id' | 'createdAt'>
 {
-  @IsDefined()
-  @IsNotEmpty()
-  @IsString()
-  @ApiProperty({
-    type: String,
-    example: 'amazon.com',
-  })
-  url: string;
-}
-
-export class CreateSiteReportDto implements Omit<SiteReport, 'createdAt'> {
   @IsDefined()
   @IsNotEmpty()
   @IsString()
@@ -78,6 +77,15 @@ export class CreateSiteReportDto implements Omit<SiteReport, 'createdAt'> {
     example: 'virustotal',
   })
   provider: string;
+
+  @IsDefined()
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({
+    type: String,
+    example: 'layer1',
+  })
+  layer: string;
 
   @IsDefined()
   @IsNotEmpty()

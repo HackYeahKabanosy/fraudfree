@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { SiteReportRepository } from './site-report.repository';
 import { CreateSiteReportDto, SiteReportResponseDto } from './site-report.dto';
 import { ProviderService } from '../provider/provider.service';
-import { ProviderResponseDto } from '../provider/provider.dto';
 
 @Injectable()
 export class SiteReportService {
@@ -12,18 +11,34 @@ export class SiteReportService {
   ) {}
 
   async crawler(url: string) {
-    const reportData: ProviderResponseDto[] =
-      await this.providerService.factory(url);
+    const reportData = await this.providerService.factory(url);
 
-    for (const report of reportData) {
-      await this.siteReportRepository.create({
-        url,
-        provider: report.provider,
-        data: report.report,
-      });
+    for (const layer in reportData) {
+      for (const report of reportData[layer]) {
+        await this.siteReportRepository.create({
+          url,
+          provider: report.provider,
+          layer: report.layer,
+          data: report.report,
+        });
+      }
     }
 
     return reportData;
+  }
+
+  async getReportsByUrl(url: string) {
+    const reports = await this.siteReportRepository.getByUrl(url);
+    const organizedReports = {};
+
+    for (const report of reports) {
+      if (!organizedReports[report.layer]) {
+        organizedReports[report.layer] = [];
+      }
+      organizedReports[report.layer].push(report);
+    }
+
+    return organizedReports;
   }
 
   async create(data: CreateSiteReportDto): Promise<SiteReportResponseDto> {

@@ -20,6 +20,10 @@ export class SiteReportRepository {
     );
   }
 
+  async getByUrl(url: string): Promise<SiteReport[]> {
+    return await this.siteReportModel.find({ url });
+  }
+
   async getNotEq(
     url: string,
     provider: string,

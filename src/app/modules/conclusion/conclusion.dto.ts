@@ -24,11 +24,6 @@ export class ConclusionResponseDto implements Conclusion {
 
   @IsDefined()
   @IsNotEmpty()
-  @IsString()
-  status: string;
-
-  @IsDefined()
-  @IsNotEmpty()
   @IsNumber()
   @ApiProperty({
     type: Number,
