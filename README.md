@@ -1,6 +1,6 @@
 # Free Fraud API
 
-## Starting Development
+## Starting Dev
 
 - First clone the repo
 - Copy the .env-dist to .env
